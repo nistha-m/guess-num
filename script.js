@@ -82,3 +82,55 @@ function resetGame() {
     guessBtn.disabled = false;
     guessInput.value = "";
 }
+
+// Only bind events if we're on game.html
+if (document.getElementById("guessBtn")) {
+  const guessInput = document.getElementById("guessInput");
+  const guessBtn = document.getElementById("guessBtn");
+  const resetBtn = document.getElementById("resetBtn");
+  const feedback = document.getElementById("feedback");
+  const guessList = document.getElementById("guessList");
+  const attemptCount = document.getElementById("attemptCount");
+
+  guessBtn.onclick = () => processGuess();
+  guessInput.onkeydown = (e) => { if (e.key === "Enter") processGuess(); };
+  guessInput.onchange = () => {
+    if (guessInput.value < 1 || guessInput.value > 100) {
+      feedback.innerHTML = "❗ Enter a number between 1 and 100!";
+    }
+  };
+  resetBtn.onclick = () => resetGame();
+
+  function processGuess() {
+    const guess = Number(guessInput.value);
+    if (guess < 1 || guess > 100 || isNaN(guess)) {
+      feedback.innerHTML = "❌ Invalid input.";
+      return;
+    }
+
+    guesses.push(guess);
+    attempts++;
+    attemptCount.innerHTML = attempts;
+    guessList.innerHTML = guesses.join(", ");
+
+    if (guess === secretNumber) {
+      window.location.href = "win.html"; // Navigate to win screen
+    } else if (guess < secretNumber) {
+      feedback.innerHTML = "⬆️ Too low!";
+    } else {
+      feedback.innerHTML = "⬇️ Too high!";
+    }
+
+    guessInput.value = "";
+  }
+
+  function resetGame() {
+    secretNumber = Math.floor(Math.random() * 100) + 1;
+    guesses = [];
+    attempts = 0;
+    guessList.innerHTML = "None";
+    attemptCount.innerHTML = "0";
+    feedback.innerHTML = "Game reset. Try again!";
+    guessInput.value = "";
+  }
+}

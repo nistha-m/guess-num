@@ -60,3 +60,28 @@ button:hover {
     margin-top: 15px;
     font-size: 1rem;
 }
+
+.fun-btn {
+    margin-top: 20px;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    color: white;
+    background: linear-gradient(45deg, #ff416c, #ff4b2b);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+    animation: pulse 2s infinite;
+}
+
+.fun-btn:hover {
+    transform: scale(1.05);
+    background: linear-gradient(45deg, #ff4b2b, #ff416c);
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
