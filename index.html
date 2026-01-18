@@ -1,26 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Welcome - Number Game</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>Choose Level - Number Game</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="game-container">
-    <h1>🎮 Welcome to the Number Guessing Game!</h1>
+    <div class="game-container">
+        <h1>🎮 Number Guessing Game</h1>
 
-    <p><strong>Instructions:</strong></p>
-    <ul style="text-align: left; max-width: 400px; margin: auto;">
-      <li>🔢 I will think of a number between <strong>1 and 100</strong>.</li>
-      <li>🧠 Your job is to guess the number in as few tries as possible.</li>
-      <li>💬 After each guess, I'll tell you if it's too high or too low.</li>
-      <li>🏆 When you guess right, you’ll see a special win screen!</li>
-      <li>🔁 You can reset and try again anytime during the game.</li>
-    </ul>
+        <p><strong>Instructions:</strong></p>
+        <ul style="text-align: left; max-width: 400px; margin: auto;">
+            <li>🔢 I will think of a number between a range.</li>
+            <li>🧠 Your job is to guess it in as few tries as possible.</li>
+            <li>💬 You'll get hints: too high / too low.</li>
+            <li>🏆 Beat a level to unlock the next one!</li>
+        </ul>
 
-    <button class="fun-btn" onclick="location.href='game.html'">
-      ▶ Play Now!
-    </button>
-  </div>
+        <h2>Choose Your Level</h2>
+        <button onclick="startLevel(1)">🟢 Level 1 (1–50)</button>
+        <button onclick="startLevel(2)">🔵 Level 2 (1–100)</button>
+        <button onclick="startLevel(3)">🟣 Level 3 (1–200)</button>
+    </div>
+
+    <script>
+        function startLevel(level) {
+            sessionStorage.setItem("level", level);
+            window.location.href = "game.html";
+        }
+    </script>
 </body>
 </html>

@@ -1,16 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>You Win!</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>You Win!</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="game-container">
-    <h1>🎉 Congratulations!</h1>
-    <p>You guessed the number correctly!</p>
-    <button onclick="location.href='game.html'">Play Again</button>
-    <button onclick="location.href='index.html'">Back to Home</button>
-  </div>
+    <div class="game-container">
+        <h1>🎉 You Got It!</h1>
+        <p id="nextMsg"></p>
+
+        <button id="nextBtn">Next Level</button>
+        <button onclick="location.href='index.html'">Back to Levels</button>
+    </div>
+
+    <script>
+        let nextLevel = Number(sessionStorage.getItem("nextLevel")) || 2;
+        let ranges = {1: 50, 2: 100, 3: 200};
+        let msg = "";
+
+        if (ranges[nextLevel]) {
+            msg = `🎮 Ready for Level ${nextLevel}?`;
+            document.getElementById("nextBtn").onclick = function() {
+                sessionStorage.setItem("level", nextLevel);
+                window.location.href = "game.html";
+            }
+        } else {
+            msg = "🏅 You've completed all current levels!";
+            document.getElementById("nextBtn").style.display = "none";
+        }
+
+        document.getElementById("nextMsg").innerText = msg;
+    </script>
 </body>
 </html>

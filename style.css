@@ -85,3 +85,55 @@ button:hover {
     50% { transform: scale(1.05); }
     100% { transform: scale(1); }
 }
+body {
+    background: linear-gradient(to right, #8e2de2, #4a00e0);
+    font-family: 'Segoe UI', sans-serif;
+    color: white;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-container {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    width: 90%;
+    max-width: 450px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+}
+
+input, button {
+    font-size: 1rem;
+    padding: 10px;
+    margin: 10px 5px;
+    border-radius: 5px;
+    border: none;
+}
+
+button {
+    cursor: pointer;
+    font-weight: bold;
+    background-color: #ff4b2b;
+    color: white;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background-color: #ff416c;
+}
+
+.feedback {
+    font-size: 1.2rem;
+    min-height: 30px;
+    margin-top: 10px;
+}
+
+.stats {
+    margin-top: 10px;
+    font-size: 1rem;
+}

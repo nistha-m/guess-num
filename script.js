@@ -134,3 +134,58 @@ if (document.getElementById("guessBtn")) {
     guessInput.value = "";
   }
 }
+
+let level = Number(sessionStorage.getItem("level")) || 2;
+let ranges = {1: 50, 2: 100, 3: 200};
+let maxNumber = ranges[level] || 100;
+
+
+if (document.getElementById("guessBtn")) {
+    const guessInput = document.getElementById("guessInput");
+    const guessBtn = document.getElementById("guessBtn");
+    const resetBtn = document.getElementById("resetBtn");
+    const feedback = document.getElementById("feedback");
+    const guessList = document.getElementById("guessList");
+    const attemptCount = document.getElementById("attemptCount");
+    const levelText = document.getElementById("levelText");
+
+    levelText.innerText = `Level ${level} — Guess between 1 and ${maxNumber}`;
+
+    guessBtn.onclick = () => processGuess();
+    guessInput.onkeydown = (e) => { if (e.key === "Enter") processGuess(); };
+    resetBtn.onclick = () => resetGame();
+
+    function processGuess() {
+        const guess = Number(guessInput.value);
+        if (guess < 1 || guess > maxNumber || isNaN(guess)) {
+            feedback.innerHTML = `⚠️ Enter between 1 and ${maxNumber}`;
+            return;
+        }
+
+        guesses.push(guess);
+        attempts++;
+        attemptCount.innerHTML = attempts;
+        guessList.innerHTML = guesses.join(", ");
+
+        if (guess === secretNumber) {
+            sessionStorage.setItem("nextLevel", level + 1);
+            window.location.href = "win.html";
+        } else if (guess < secretNumber) {
+            feedback.innerHTML = "⬆️ Too low!";
+        } else {
+            feedback.innerHTML = "⬇️ Too high!";
+        }
+
+        guessInput.value = "";
+    }
+
+    function resetGame() {
+        secretNumber = Math.floor(Math.random() * maxNumber) + 1;
+        guesses = [];
+        attempts = 0;
+        attemptCount.innerHTML = "0";
+        guessList.innerHTML = "None";
+        feedback.innerHTML = "🔄 Game reset. Start guessing!";
+        guessInput.value = "";
+    }
+}
